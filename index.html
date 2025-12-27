@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KivuRide — Dual Acquisition Offer (Cash vs NCBA Financing)</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --ink:#0b1220;
+      --paper:#ffffff;
+      --muted:#5b677a;
+      --line:#e8eef6;
+      --brand:#06347C;
+      --brand2:#0a57c7;
+      --accent:#14b8a6;
+      --gold:#f5c45e;
+      --soft:#f6f9ff;
+      --shadow: 0 16px 38px rgba(2, 8, 23, .10);
+      --radius: 18px;
+      --radius2: 26px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:#eef3fb;color:var(--ink);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;}
+    a{color:var(--brand2);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .page{
+      width: 1120px;
+      margin: 22px auto;
+      background: var(--paper);
+      border: 1px solid #e7eef8;
+      border-radius: var(--radius2);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    /* PDF-friendly page breaks */
+    .pagebreak{page-break-before:always;}
+    @media print{
+      body{background:white}
+      .page{width:auto;margin:0;border:none;border-radius:0;box-shadow:none}
+      .pagebreak{page-break-before:always;}
+      .no-print{display:none!important}
+    }
+
+    /* Header */
+    .hero{
+      position:relative;
+      padding: 26px 34px 28px 34px;
+      background:
+        radial-gradient(1200px 420px at 20% 20%, rgba(245,196,94,.35), transparent 55%),
+        radial-gradient(900px 360px at 85% 15%, rgba(20,184,166,.28), transparent 55%),
+        linear-gradient(120deg, #052043 0%, #06347C 45%, #0b57c7 100%);
+      color: #fff;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 22px;
+      align-items: center;
+    }
+    .brandline{
+      display:flex;
+      align-items:center;
+      gap: 14px;
+    }
+    .logo{
+      width: 62px;
+      height: 62px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+    .logo img{width: 100%; height: 100%; object-fit: contain; padding: 8px;}
+    .titlewrap{min-width: 0}
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.20);
+      font-size: 12px;
+      letter-spacing:.25px;
+    }
+    .kicker b{color: #fff}
+    h1{
+      margin: 10px 0 6px 0;
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -.2px;
+    }
+    .subtitle{
+      margin:0;
+      color: rgba(255,255,255,.90);
+      font-size: 14px;
+      line-height: 1.45;
+      max-width: 720px;
+    }
+    .meta{
+      display:flex;
+      justify-content:flex-end;
+      align-items:flex-start;
+      gap: 10px;
+      flex-direction: column;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 16px;
+      padding: 14px 14px;
+    }
+    .meta .row{display:flex;gap:10px;align-items:center}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.18);
+      font-size: 12px;
+      color: rgba(255,255,255,.92);
+      width: fit-content;
+    }
+    .pill .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(245,196,94,.20);
+    }
+    .meta small{color: rgba(255,255,255,.85); font-size: 12px; display:block}
+    .meta b{color:#fff}
+
+    /* Sections */
+    .content{padding: 22px 34px 30px 34px;}
+    .section{margin-top: 18px;}
+    .section h2{
+      margin: 0 0 8px 0;
+      font-size: 18px;
+      letter-spacing: -.15px;
+    }
+    .section p{margin: 0 0 10px 0; color: #1b2740; font-size: 13.5px; line-height: 1.65;}
+    .muted{color: var(--muted)}
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+    .card{
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 14px;
+    }
+    .card h3{margin:0 0 8px 0; font-size: 14px;}
+    .bullets{margin: 8px 0 0 0; padding: 0 0 0 18px; color:#1b2740; font-size: 13px; line-height:1.6}
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 12px;
+      color:#20304d;
+    }
+    .tag .dot{width:8px;height:8px;border-radius:999px;background: var(--accent); box-shadow: 0 0 0 4px rgba(20,184,166,.18);}
+    .tag.blue .dot{background: var(--brand2); box-shadow: 0 0 0 4px rgba(10,87,199,.16);}
+    .tag.gold .dot{background: var(--gold); box-shadow: 0 0 0 4px rgba(245,196,94,.18);}
+
+    /* Album */
+    .album{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 14px;
+      align-items: stretch;
+      margin-top: 10px;
+    }
+    .album .big{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background:#fff;
+      min-height: 220px;
+    }
+    .album .big img{width:100%;height:100%;object-fit:cover;display:block}
+    .album .stack{
+      display:grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 14px;
+    }
+    .album .small{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background:#fff;
+      min-height: 103px;
+    }
+    .album .small img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* Financial tables */
+    .table-wrap{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:#fff;
+    }
+    table{width:100%;border-collapse:collapse;font-size: 12.5px}
+    th,td{padding: 10px 10px;border-bottom: 1px solid var(--line);vertical-align:top}
+    th{background: #f0f6ff;text-align:left;color:#173055;font-weight:700}
+    tr:last-child td{border-bottom:none}
+    .num{text-align:right;white-space:nowrap}
+    .note{
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-top: 8px;
+    }
+    .highlight{
+      background: linear-gradient(90deg, rgba(245,196,94,.25), rgba(20,184,166,.15));
+      border: 1px solid rgba(245,196,94,.35);
+    }
+
+    /* Two-model comparison banner */
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .model{
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      overflow:hidden;
+      background:#fff;
+    }
+    .model .head{
+      padding: 12px 14px;
+      background: linear-gradient(120deg, rgba(6,52,124,.10), rgba(10,87,199,.06));
+      border-bottom: 1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .model .head h3{margin:0;font-size: 14px}
+    .model .body{padding: 12px 14px}
+    .badge{
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color:#20304d;
+      white-space:nowrap;
+    }
+    .badge strong{color:#0b2c5e}
+    .cta{
+      margin-top: 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 12px;
+      padding: 14px 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: #ffffff;
+    }
+    .cta b{color:#0b2c5e}
+    .smallprint{font-size: 11.5px;color: var(--muted);line-height:1.55;margin:0}
+    .footer{
+      padding: 14px 34px 18px 34px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11.5px;
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+      background: #fbfdff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="page">
+    <div class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="brandline">
+            <div class="logo">
+              <img src="https://res.cloudinary.com/dz4nl90xs/image/upload/v1766427002/Logo_w2uzzw.png" alt="KivuRide Logo" />
+            </div>
+            <div class="titlewrap">
+              <div class="kicker"><b>KIVURIDE</b> • Dual Acquisition Offer</div>
+              <h1>Fleet Investment Proposal — Two Models, One Market Opportunity</h1>
+              <p class="subtitle">
+                A single proposal presenting two execution paths for acquiring <b>Dongfeng NAMMI 06 (2026)</b> vehicles
+                and operating them under the KivuRide electric mobility ecosystem in Kigali, Rwanda.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="row">
+            <span class="pill"><span class="dot"></span> Date: <b>23/12/2025</b></span>
+          </div>
+          <small><b>Contact</b></small>
+          <small>Email: <b>administration@kivuride.com</b></small>
+          <small>Website: <b>www.kivuride.com</b> <span class="muted">(edit if needed)</span></small>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <div class="section">
+        <h2>1) Executive Summary</h2>
+        <p>
+          This offer is designed for an investor or organization seeking to deploy a scalable electric taxi fleet in Rwanda
+          through a structured operating partnership with <b>KivuRide</b>. The proposal provides two alternatives:
+          <b>(A) Full cash acquisition</b> and <b>(B) NCBA-supported financing</b> (100% principal financing structure with a refundable 10% deposit under the program mechanics).
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3><span class="tag blue"><span class="dot"></span> Two Models</span></h3>
+            <ul class="bullets">
+              <li><b>Model A:</b> Cash acquisition (highest margin, simplest structure).</li>
+              <li><b>Model B:</b> NCBA financing via an operating company + qualified drivers.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3><span class="tag gold"><span class="dot"></span> Supplier & Support</span></h3>
+            <ul class="bullets">
+              <li>Vehicles supplied and supported by <b>Long Tai Automobile International Ltd</b>.</li>
+              <li>Official distribution ecosystem (garage, spare parts, after-sales readiness).</li>
+              <li>5-year warranty coverage via <b>YNAMMI 06 warranty card</b> issued through authorized channels.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3><span class="tag"><span class="dot"></span> KivuRide Operations</span></h3>
+            <ul class="bullets">
+              <li>Demand generation + dispatch via mobile app (two-sided platform).</li>
+              <li>Call center & customer support.</li>
+              <li>Driver management + reporting & owner dashboard visibility.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>2) Why This Opportunity Exists Now</h2>
+        <p>
+          Rwanda has made e-mobility a national priority and continues to adopt incentives and reforms that reduce barriers to electric vehicle uptake,
+          including fiscal incentives and enabling infrastructure policy. This creates a favorable environment for early fleet deployment in Kigali.
+        </p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Policy Momentum for E-Mobility</h3>
+            <ul class="bullets">
+              <li>National direction toward climate-resilient transport and e-mobility incentives.</li>
+              <li>Reducing EV adoption barriers through tax and infrastructure measures (e.g., charging ecosystem support).</li>
+            </ul>
+            <p class="note">
+              See References: Government climate transport updates and incentives summaries.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Fleet Renewal Pressure in Commercial Transport</h3>
+            <ul class="bullets">
+              <li>Rwanda’s transport regulator (RURA) sets and enforces compliance for road transport operations, including taxi cab operator standards.</li>
+              <li>Public transport regulations include vehicle age-limit provisions (Official Gazette instrument available via RURA).</li>
+            </ul>
+            <p class="note">
+              This proposal aligns with the direction of fleet modernization by deploying new, warranty-backed electric vehicles designed for the region.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>3) Vehicle & Visual Overview</h2>
+        <p>
+          The <b>Dongfeng NAMMI 06 (2026)</b> is positioned as a next-generation electric vehicle with configurations tailored for regional markets.
+          For Rwanda and East Africa, supply is coordinated through an authorized distributor ecosystem, reducing maintenance and parts risk.
+        </p>
+
+        <div class="album">
+          <div class="big">
+            <img src="https://res.cloudinary.com/dz4nl90xs/image/upload/v1766426968/dongfeng_nammi_06_presales-2_lc2qib.jpg" alt="NAMMI 06 Exterior" />
+          </div>
+          <div class="stack">
+            <div class="small">
+              <img src="https://res.cloudinary.com/dz4nl90xs/image/upload/v1766426967/407-w1200-yichecar-997287156174880-3-2_urrxd6.jpg" alt="NAMMI 06 Detail" />
+            </div>
+            <div class="small">
+              <img src="https://res.cloudinary.com/dz4nl90xs/image/upload/v1766428535/The_dashboard_now_fyknmt.jpg" alt="KivuRide Dashboard Preview" />
+            </div>
+          </div>
+        </div>
+        <p class="note">
+          Dashboard visibility is provided to fleet owners for trip volume, revenue, utilization, and operational performance monitoring.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div>Prepared by: <b>KivuRide Administration</b></div>
+      <div class="muted">Document type: Proposal • Dual Model (Cash vs NCBA Financing)</div>
+    </div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page pagebreak">
+    <div class="content">
+
+      <div class="section">
+        <h2>4) KivuRide Operating Model (How the Fleet Earns)</h2>
+        <p>
+          KivuRide provides an integrated operational layer that converts fleet assets into structured mobility earnings through dispatch,
+          call center support, driver management, and corporate mobility channels (events, weddings, contracts, and scheduled mobility).
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Core Capabilities</h3>
+            <ul class="bullets">
+              <li>Ride-hailing app (driver + customer sides)</li>
+              <li>Call center & customer support</li>
+              <li>Driver onboarding, discipline & performance control</li>
+              <li>Owner reporting dashboard</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Revenue Assurance Approach</h3>
+            <ul class="bullets">
+              <li>Dispatch optimization for higher utilization</li>
+              <li>Corporate mobility channels for stable demand</li>
+              <li>Daily performance monitoring and corrective actions</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Owner Visibility</h3>
+            <ul class="bullets">
+              <li>Trips per vehicle</li>
+              <li>Daily/weekly/monthly revenue</li>
+              <li>Driver performance tracking</li>
+              <li>Operational alerts and summaries</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>5) Two Acquisition Models (Choose One)</h2>
+
+          <div class="split">
+            <div class="model">
+              <div class="head">
+                <h3>Model A — Full Cash Payment</h3>
+                <span class="badge"><strong>Simple structure</strong> • Highest margin</span>
+              </div>
+              <div class="body">
+                <p class="muted">
+                  Best for investors seeking immediate ownership and simplified execution without bank repayment obligations.
+                </p>
+                <ul class="bullets">
+                  <li>Direct acquisition from authorized supplier (Long Tai)</li>
+                  <li>Assets can be owned personally or under a company</li>
+                  <li>Operations executed under KivuRide (drivers + monitoring)</li>
+                </ul>
+
+                <div class="card highlight" style="margin-top:12px;">
+                  <h3>Operating Cost Structure (Per Vehicle)</h3>
+                  <ul class="bullets">
+                    <li><b>App + Call Center + Internet:</b> 100,000 FRW / month</li>
+                    <li><b>Management Fee:</b> 30,000 FRW / month</li>
+                    <li><b>Charging:</b> 18,000 FRW / week (≈ 72,000 FRW / month)</li>
+                    <li><b>Insurance:</b> 1,400,000 FRW / year (≈ 116,667 FRW / month)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="model">
+              <div class="head">
+                <h3>Model B — NCBA Financing (Driver-Support Structure)</h3>
+                <span class="badge"><strong>Scale with financing</strong> • Program-aligned</span>
+              </div>
+              <div class="body">
+                <p class="muted">
+                  Built for scaling through a financing program structure aligned with driver participation:
+                  the investor forms a company, onboards eligible drivers, and submits required documents through the company.
+                </p>
+                <ul class="bullets">
+                  <li><b>Loan principal:</b> 100% financing structure</li>
+                  <li><b>Deposit:</b> 10% deposit submitted, refundable upon vehicle arrival + yellow card issuance (program mechanism)</li>
+                  <li><b>Term:</b> 5 years • <b>Interest:</b> 15% APR (compounded monthly)</li>
+                  <li><b>Collateral:</b> Vehicle serves as collateral under program narrative</li>
+                </ul>
+
+                <div class="card" style="margin-top:12px;">
+                  <h3>Required Execution Structure</h3>
+                  <ul class="bullets">
+                    <li>Investor establishes a company for fleet operation</li>
+                    <li>Company onboards licensed taxi drivers with operating statements</li>
+                    <li>Driver documents + company documents submitted under NCBA requirements</li>
+                    <li>Company receives financing approval; fleet registered under company</li>
+                    <li>KivuRide supports onboarding and operationalization</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta">
+            <div>
+              <b>Decision Point:</b> Choose Model A (Cash) or Model B (NCBA Financing). Both models operate under the same KivuRide ecosystem.
+              <p class="smallprint" style="margin-top:6px;">
+                The financial illustration below uses conservative assumptions and is intended for decision-making and planning.
+                Final outcomes depend on vehicle utilization, market conditions, and compliance readiness.
+              </p>
+            </div>
+            <div class="badge"><strong>Example fleet size:</strong> 30 vehicles <span class="muted">(edit)</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div>Prepared by: <b>KivuRide Administration</b></div>
+      <div class="muted">This proposal is informational and not a binding contract.</div>
+    </div>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page pagebreak">
+    <div class="content">
+
+      <div class="section">
+        <h2>6) Financial Illustration (Per Vehicle) — Assumptions</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Earnings Assumptions</h3>
+            <ul class="bullets">
+              <li><b>Daily gross target:</b> 60,000 FRW / day</li>
+              <li><b>Working days:</b> 6 days/week (≈ 26 days/month)</li>
+              <li><b>Estimated monthly gross:</b> 1,560,000 FRW</li>
+            </ul>
+            <p class="note">These values can be adjusted based on the investor’s risk appetite and route strategy.</p>
+          </div>
+          <div class="card">
+            <h3>Operating Costs (Per Vehicle)</h3>
+            <ul class="bullets">
+              <li><b>App + Call Center + Internet:</b> 100,000 / month</li>
+              <li><b>Management:</b> 30,000 / month</li>
+              <li><b>Charging:</b> 18,000 / week (≈ 72,000 / month)</li>
+              <li><b>Insurance:</b> 1,400,000 / year (≈ 116,667 / month)</li>
+              <li><b>Total estimated operating cost:</b> 318,667 FRW / month</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>7) Model A — Cash Acquisition (Per Vehicle Summary)</h2>
+          <div class="table-wrap">
+            <table>
+              <tr>
+                <th>Item</th>
+                <th class="num">Amount (FRW)</th>
+              </tr>
+              <tr>
+                <td>Estimated Monthly Gross Revenue</td>
+                <td class="num">1,560,000</td>
+              </tr>
+              <tr>
+                <td>Total Monthly Operating Costs (KivuRide + Charging + Insurance)</td>
+                <td class="num">318,667</td>
+              </tr>
+              <tr>
+                <td><b>Estimated Monthly Net (Before Taxes & Contingencies)</b></td>
+                <td class="num"><b>1,241,333</b></td>
+              </tr>
+            </table>
+          </div>
+          <p class="note">
+            Cash model yields the highest margin because there is no bank repayment obligation. Taxes, depreciation, and contingency reserves should be added per investor policy.
+          </p>
+        </div>
+
+        <div class="section">
+          <h2>8) Model B — NCBA Financing (Per Vehicle Summary)</h2>
+          <p class="muted">
+            Illustration assumes: <b>Vehicle price/principal = 38,000,000 FRW</b>, APR = <b>15%</b>, term = <b>60 months</b>,
+            amortized with compounded monthly interest.
+          </p>
+
+          <div class="table-wrap">
+            <table>
+              <tr>
+                <th>Item</th>
+                <th class="num">Amount (FRW)</th>
+              </tr>
+              <tr>
+                <td>Estimated Monthly Gross Revenue</td>
+                <td class="num">1,560,000</td>
+              </tr>
+              <tr>
+                <td>Total Monthly Operating Costs (KivuRide + Charging + Insurance)</td>
+                <td class="num">318,667</td>
+              </tr>
+              <tr>
+                <td><b>Net Before Bank Repayment</b></td>
+                <td class="num"><b>1,241,333</b></td>
+              </tr>
+              <tr>
+                <td><b>Estimated Monthly Bank Repayment (per vehicle)</b></td>
+                <td class="num"><b>904,017</b></td>
+              </tr>
+              <tr>
+                <td><b>Estimated Monthly Net After Bank Repayment</b></td>
+                <td class="num"><b>337,316</b></td>
+              </tr>
+              <tr>
+                <td>Implied Daily Allocation to Bank (904,017 ÷ 26 working days)</td>
+                <td class="num">34,770</td>
+              </tr>
+            </table>
+          </div>
+
+          <p class="note">
+            These figures are illustrative and support investor decision-making. Final repayment terms are subject to NCBA approval, borrower profile, and program specifics.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div>Prepared by: <b>KivuRide Administration</b></div>
+      <div class="muted">Financial illustration uses standard amortization logic (monthly compounding) for planning purposes.</div>
+    </div>
+  </div>
+
+  <!-- PAGE 4 -->
+  <div class="page pagebreak">
+    <div class="content">
+
+      <div class="section">
+        <h2>9) Compliance & Governance (RURA Alignment)</h2>
+        <p>
+          Rwanda Utilities Regulatory Authority (<b>RURA</b>) regulates road transport service standards and ensures taxi cab operators comply with applicable rules and licensing requirements.
+          This proposal is structured to support compliant fleet deployment through documented ownership, driver qualification, and operational traceability.
+        </p>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Operational Compliance (Practical)</h3>
+            <ul class="bullets">
+              <li>Operate through a formal ownership structure (individual or company)</li>
+              <li>Onboard drivers with appropriate licensing and documentation</li>
+              <li>Maintain required insurance coverage</li>
+              <li>Ensure vehicles are registered and compliant with taxi cab standards</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Governance & Transparency (Owner Protection)</h3>
+            <ul class="bullets">
+              <li>Owner dashboard access for revenue and utilization monitoring</li>
+              <li>Call center logging and trip traceability</li>
+              <li>Driver performance metrics and accountability</li>
+              <li>Structured monthly reporting and operational oversight</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>10) Risk & Mitigation</h2>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Key Risks</h3>
+              <ul class="bullets">
+                <li>Demand variability and route competition</li>
+                <li>Driver performance risk</li>
+                <li>Maintenance and downtime</li>
+                <li>Policy and regulatory changes</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Mitigation Measures</h3>
+              <ul class="bullets">
+                <li>Corporate channels + dispatch optimization to stabilize utilization</li>
+                <li>Driver governance, monitoring, and performance controls</li>
+                <li>Authorized supplier support ecosystem (parts + service readiness)</li>
+                <li>Owner visibility and data-driven corrective actions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>11) Next Steps</h2>
+          <div class="card">
+            <ol class="bullets" style="margin:0; padding-left:18px;">
+              <li><b>Select a model:</b> Cash acquisition or NCBA financing structure.</li>
+              <li><b>Confirm fleet size</b> and operational timeline.</li>
+              <li><b>Finalize supplier coordination</b> (Long Tai Automobile International Ltd).</li>
+              <li><b>Operational onboarding</b>: drivers, dispatch setup, dashboard access, governance rules.</li>
+            </ol>
+            <p class="note">
+              If Model B (NCBA) is selected, KivuRide supports coordination of documentation preparation and operational readiness
+              for the company + drivers structure required by the program.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>References (For Credibility & Verification)</h2>
+          <div class="table-wrap">
+            <table>
+              <tr>
+                <th>#</th>
+                <th>Source</th>
+                <th>What it supports</th>
+              </tr>
+              <tr>
+                <td class="num">1</td>
+                <td>
+                  KT Press (Sep 2025): NCBA & Kabisa EV taxi initiative
+                  <br><a href="https://www.ktpress.rw/2025/09/ncba-bank-kabisa-power-rwandas-first-umurabyo-electric-taxi-fleet/" target="_blank" rel="noreferrer">Open</a>
+                </td>
+                <td>NCBA narrative on 100% financing, vehicle collateral, EV taxi rollout.</td>
+              </tr>
+              <tr>
+                <td class="num">2</td>
+                <td>
+                  Igihe (Sep 2025): NCBA and Kabisa roll out EV taxis
+                  <br><a href="https://en.igihe.com/news/article/ncba-and-kabisa-roll-out-umurabyo-electric-taxi-cabs-in-rwanda" target="_blank" rel="noreferrer">Open</a>
+                </td>
+                <td>Reinforces 100% financing positioning for EV taxis in Rwanda.</td>
+              </tr>
+              <tr>
+                <td class="num">3</td>
+                <td>
+                  Changing Transport (Oct 2024): Rwanda EV incentives overview
+                  <br><a href="https://changing-transport.org/driving-rwandas-green-future/" target="_blank" rel="noreferrer">Open</a>
+                </td>
+                <td>EV incentive framing (e.g., fiscal measures, charging ecosystem support).</td>
+              </tr>
+              <tr>
+                <td class="num">4</td>
+                <td>
+                  MININFRA update: EV incentives
+                  <br><a href="https://www.mininfra.gov.rw/updates/news-details/rwanda-has-awesome-new-incentives-for-electric-vehicles" target="_blank" rel="noreferrer">Open</a>
+                </td>
+                <td>Government incentives direction for electric vehicles.</td>
+              </tr>
+              <tr>
+                <td class="num">5</td>
+                <td>
+                  RURA — Road Transport overview page
+                  <br><a href="https://www.rura.rw/sectors/transport/sub-sectors-and-services/road-transport" target="_blank" rel="noreferrer">Open</a>
+                </td>
+                <td>RURA’s role in regulating road transport and taxi cab operator compliance.</td>
+              </tr>
+              <tr>
+                <td class="num">6</td>
+                <td>
+                  Official Gazette (via RURA) — public transport compliance (vehicle age-limit provision)
+                  <br><a href="https://www.rura.rw/index.php?eID=dumpFile&f=99754&t=f&token=5601fb28962caf1d327d783f68a452c20052578a" target="_blank" rel="noreferrer">Open</a>
+                </td>
+                <td>Shows public transport activities must comply with a vehicle age limit provision (text references 20 years).</td>
+              </tr>
+              <tr>
+                <td class="num">7</td>
+                <td>
+                  Rwanda Climate Change portal: climate-resilient transport actions
+                  <br><a href="https://climatechange.gov.rw/updates/details?cHash=2aeaaf5f4246ca5d225c1d7636aca4e9&tx_news_pi1%5Baction%5D=detail&tx_news_pi1%5Bcontroller%5D=News&tx_news_pi1%5Bnews%5D=213" target="_blank" rel="noreferrer">Open</a>
+                </td>
+                <td>National framing on climate-resilient transport initiatives.</td>
+              </tr>
+            </table>
+          </div>
+          <p class="note">
+            References are provided to strengthen professionalism and traceability. Where financing program details differ by borrower profile or updated policy,
+            final terms should be confirmed directly with NCBA during onboarding.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div>Prepared by: <b>KivuRide Administration</b></div>
+      <div class="muted">© KivuRide — Kigali, Rwanda</div>
+    </div>
+  </div>
+
+</body>
+</html>
